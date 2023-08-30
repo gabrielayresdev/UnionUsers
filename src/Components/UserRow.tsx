@@ -7,6 +7,7 @@ const UserRow = ({ user }: { user: User }) => {
       <p>{user.id.value}</p>
       <p>{user.name.first}</p>
       <p>{user.name.last}</p>
+      <p>{user.name.title}</p>
       <p>{user.dob.date.toString()}</p>
       <p>{user.dob.age}</p>
     </div>
