@@ -3,6 +3,7 @@ import useFetch from "../Hooks/useFetch";
 import { User } from "../vite-env";
 import UserRow from "./UserRow";
 import usePagination from "../Hooks/usePagination";
+import { useSearchContext } from "../Contexts/SearchContext";
 
 interface Info {
   seed: string;
@@ -11,7 +12,7 @@ interface Info {
   version: string;
 }
 
-interface Result {
+export interface Result {
   info: Info;
   results: User[];
 }
@@ -35,6 +36,7 @@ const Home = () => {
   const itemsPerPage = 10;
   const [totalPages, setTotalPages] = React.useState(0);
   const { page, goTo, nextPage, previousPage } = usePagination(totalPages);
+  const { users, searchValue, setSearchValue } = useSearchContext();
 
   React.useEffect(() => {
     if (data?.results) {
@@ -66,9 +68,17 @@ const Home = () => {
     }
   }, [page, totalPages]);
 
+  console.log(users);
   if (data)
     return (
       <div>
+        <input
+          type="text"
+          value={searchValue}
+          onChange={({ target }) => {
+            setSearchValue(target.value);
+          }}
+        />
         {data.results
           .slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)
           .map((user, index) => {
@@ -79,7 +89,11 @@ const Home = () => {
           Previous
         </button>
         {paginationButtons?.map((v) => {
-          return <button onClick={() => goTo(v)}>{v + 1}</button>;
+          return (
+            <button key={v} onClick={() => goTo(v)}>
+              {v + 1}
+            </button>
+          );
         })}
         <button style={{ margin: "1rem" }} onClick={() => nextPage()}>
           Next
