@@ -72,7 +72,6 @@ const Home = () => {
     if (list && endPage * itemsPerPage > list.length && list.length !== 5000) {
       {
         // Caso os usuários não tenham sido carregados, novas requisições serão feitas de cem em cem usuários
-        console.log("Carreguei mais usuários");
         setUrl(
           `https://randomuser.me/api/?results=${list.length + 100}&seed=foobar`
         );
@@ -83,10 +82,7 @@ const Home = () => {
   React.useEffect(() => {
     // Se a requisição de todos os usuários já tiver sido finalizada, os usuários exibidos serão atualizados
     if (search.data?.results) {
-      console.log(search.data.results.length);
-      setList(() => {
-        return [...search.data.results];
-      });
+      setList([...search.data.results]);
     }
   }, [search.data]);
 

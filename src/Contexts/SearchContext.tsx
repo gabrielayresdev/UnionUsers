@@ -5,7 +5,7 @@ import { Result } from "../Components/Home";
 
 interface ISearchContext {
   users: User[] | null;
-  data: Result;
+  data: Result | null;
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -31,9 +31,12 @@ const SearchContextProvider = ({ children }: React.PropsWithChildren) => {
       if (searchValue.length !== 0) {
         setUsers(() =>
           results.filter((u) => {
-            return `${u.name.first} ${u.name.last}`
-              .toLowerCase()
-              .includes(searchValue.toLowerCase());
+            return (
+              `${u.name.first} ${u.name.last}`
+                .toLowerCase()
+                .includes(searchValue.toLowerCase()) ||
+              u.login.uuid === searchValue
+            );
           })
         );
       } else setUsers(null);
