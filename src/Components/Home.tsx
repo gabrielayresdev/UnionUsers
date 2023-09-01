@@ -29,18 +29,22 @@ interface Names {
 }
 
 const Home = () => {
-  const { data, loading, erro } = useFetch<Result>(
+  const [url, setUrl] = React.useState(
     "https://randomuser.me/api/?results=100&seed=foobar"
   );
+  const { data, loading, erro } = useFetch<Result>(url);
 
   const itemsPerPage = 10;
-  const [totalPages, setTotalPages] = React.useState(0);
+  const totalPages = 5000 / itemsPerPage;
   const { page, goTo, nextPage, previousPage } = usePagination(totalPages);
-  const { users, searchValue, setSearchValue } = useSearchContext();
+  const search = useSearchContext();
+  const [list, setList] = React.useState<User[] | null>(null);
 
   React.useEffect(() => {
     if (data?.results) {
-      setTotalPages(data.results.length / itemsPerPage);
+      setList(() => {
+        return [...data.results];
+      });
     }
   }, [data]);
 
@@ -53,12 +57,10 @@ const Home = () => {
     let startPage = Math.max(page, 0);
     const endPage = Math.min(startPage + visiblePages, totalPages) - 1;
     startPage = Math.max(endPage - visiblePages + 1, 0);
-    console.log(startPage);
 
     setPaginationButtons(null);
     for (let index = startPage; index <= endPage; index++) {
       setPaginationButtons((current) => {
-        console.log("Primeiro:", startPage);
         if (current !== null) {
           return [...current, index];
         } else {
@@ -66,20 +68,39 @@ const Home = () => {
         }
       });
     }
-  }, [page, totalPages]);
 
-  console.log(users);
-  if (data)
+    if (list && endPage * itemsPerPage > list.length && list.length !== 5000) {
+      {
+        // Caso os usuários não tenham sido carregados, novas requisições serão feitas de cem em cem usuários
+        console.log("Carreguei mais usuários");
+        setUrl(
+          `https://randomuser.me/api/?results=${list.length + 100}&seed=foobar`
+        );
+      }
+    }
+  }, [page, totalPages, list]);
+
+  React.useEffect(() => {
+    // Se a requisição de todos os usuários já tiver sido finalizada, os usuários exibidos serão atualizados
+    if (search.data?.results) {
+      console.log(search.data.results.length);
+      setList(() => {
+        return [...search.data.results];
+      });
+    }
+  }, [search.data]);
+
+  if (list)
     return (
       <div>
         <input
           type="text"
-          value={searchValue}
+          value={search.searchValue}
           onChange={({ target }) => {
-            setSearchValue(target.value);
+            search.setSearchValue(target.value);
           }}
         />
-        {data.results
+        {list
           .slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)
           .map((user, index) => {
             return <UserRow user={user} key={index} />;
