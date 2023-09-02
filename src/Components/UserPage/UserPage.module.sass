@@ -1,0 +1,73 @@
+@import '/src/variables'
+    
+.userPage 
+    background-color: $backgroundColor
+    display: flex
+    flex-direction: column
+
+    .return
+        color: $C3
+        display: block
+        width: fit-content
+        text-decoration: none
+        margin: 1rem 1.5rem
+        &::after
+            content: ''
+            width: 0
+            height: 2px
+            background: #811AC0
+            display: block
+            transition: all .3s
+        &:hover::after 
+            width: 100%
+    
+    .profileHeader
+        display: flex
+        flex-direction: column
+        align-items: center
+        border-bottom: 1px solid $C5
+        .imageContainer 
+            width: 9.375rem
+            aspect-ratio: 1/1
+            border-radius: 50%
+            overflow: hidden
+            margin-bottom: 2rem
+
+            img 
+                width: 100%
+        
+        .name 
+            font-size: 2rem
+            font-weight: 700
+            line-height: 1.171875
+        .title
+            color: $C4
+            line-height: 1.171875
+            font-size: 1.5rem
+            margin-bottom: 3rem
+    .container 
+        align-self: center
+        .pageController 
+            button 
+                all: unset
+                font-size: 1.5rem
+                font-weight: 500
+                color: $C2
+                padding: 2rem 0
+                cursor: pointer
+
+                &::after
+                    content: ''
+                    width: 0
+                    height: 2px
+                    display: block
+                    background: #811AC0
+                    margin-top: 0.875rem
+                    transition: all .3s
+                &.active::after
+                    width: 100%
+                span    
+                    padding: 0 3.625rem
+                
+    
+        

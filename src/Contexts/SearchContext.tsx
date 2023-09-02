@@ -20,7 +20,7 @@ export function useSearchContext() {
 
 const SearchContextProvider = ({ children }: React.PropsWithChildren) => {
   const [users, setUsers] = React.useState<User[] | null>(null);
-  const { data, erro } = useFetch<Result>(
+  const { data, loading, erro } = useFetch<Result>(
     "https://randomuser.me/api/?results=500&seed=foobar"
   );
   const [searchValue, setSearchValue] = React.useState<string>("");

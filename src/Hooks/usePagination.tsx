@@ -6,7 +6,7 @@ const usePagination = (lastPage: number) => {
 
   function goTo(destiny: number) {
     // Se a página de destino existir e não for a atual, page é atualizado.
-    if (!(destiny < 0 || page === destiny || destiny > lastPage)) {
+    if (!(destiny < 0 || page === destiny || destiny >= lastPage)) {
       setPage(destiny);
     }
   }
