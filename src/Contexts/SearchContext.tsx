@@ -1,7 +1,7 @@
 import React from "react";
 import { User } from "../vite-env";
 import useFetch from "../Hooks/useFetch";
-import { Result } from "../Components/Home";
+import { Result } from "../Components/Home/Home";
 
 interface ISearchContext {
   users: User[] | null;
