@@ -6,6 +6,7 @@ import { Result } from "../Components/Home";
 interface ISearchContext {
   users: User[] | null;
   data: Result | null;
+  loading: boolean;
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -45,7 +46,7 @@ const SearchContextProvider = ({ children }: React.PropsWithChildren) => {
 
   return (
     <SearchContext.Provider
-      value={{ users, data, searchValue, setSearchValue }}
+      value={{ users, data, loading, searchValue, setSearchValue }}
     >
       {children}
     </SearchContext.Provider>

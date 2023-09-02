@@ -6,6 +6,7 @@ import { User } from "../../vite-env";
 import styles from "./UserPage.module.sass";
 import usePagination from "../../Hooks/usePagination";
 import Info from "./sections/Info";
+import UserPageLoading from "./UserPageLoading";
 
 export type data = [string, string];
 type sectionData = data[];
@@ -25,6 +26,7 @@ const UserPage = () => {
     }
   }, [search, params]);
 
+  // Valores que serão exibidos na seção de informações
   React.useEffect(() => {
     if (search.users?.length === 1) {
       setUser(search.users[0]);
@@ -55,6 +57,7 @@ const UserPage = () => {
     }
   }, [search.users, user]);
 
+  if (search.loading) return <UserPageLoading />;
   if (user)
     return (
       <div className={styles.userPage}>
@@ -95,7 +98,6 @@ const UserPage = () => {
         </div>
       </div>
     );
-  else return <div>Não encontrado</div>;
 };
 
 export default UserPage;
