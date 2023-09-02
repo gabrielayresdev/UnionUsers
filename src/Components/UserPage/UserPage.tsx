@@ -20,6 +20,7 @@ const UserPage = () => {
   >();
   const { page, goTo } = usePagination(3);
 
+  // Faz o search pelo id do usuário no searchContext
   React.useEffect(() => {
     if (params.id) {
       search.setSearchValue(params.id);
