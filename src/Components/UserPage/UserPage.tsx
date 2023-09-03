@@ -7,6 +7,7 @@ import styles from "./UserPage.module.sass";
 import usePagination from "../../Hooks/usePagination";
 import Info from "./sections/Info";
 import UserPageLoading from "./UserPageLoading";
+import ErrorPage from "../Errors/ErrorPage";
 
 export type data = [string, string];
 type sectionData = data[];
@@ -58,8 +59,9 @@ const UserPage = () => {
     }
   }, [search.users, user]);
 
-  if (search.loading) return <UserPageLoading />;
-  if (user)
+  if (search.erro) return <ErrorPage error={search.erro} />;
+  else if (search.loading) return <UserPageLoading />;
+  else if (user)
     return (
       <div className={styles.userPage}>
         <Link to="/" className={styles.return}>

@@ -8,6 +8,7 @@ import UserList from "./UserList";
 import UserSearch from "./UserSearch";
 
 import styles from "./Home.module.sass";
+import ErrorPage from "../Errors/ErrorPage";
 
 interface Info {
   seed: string;
@@ -36,7 +37,7 @@ const Home = () => {
   const [url, setUrl] = React.useState(
     "https://randomuser.me/api/?results=100&seed=foobar"
   );
-  const { data, loading, erro } = useFetch<Result>(url);
+  const { data, erro } = useFetch<Result>(url);
   const [list, setList] = React.useState<User[] | null>(null);
 
   const itemsPerPage = 10;
@@ -58,7 +59,6 @@ const Home = () => {
     }
   }, [data, search.data]);
 
-  console.log(data?.results.length);
   // Executa uma requisição por mais usuários caso seja possível acessar uma página não carregada
   function requestMoreUsers(endPage: number) {
     if (list && endPage * itemsPerPage > list.length && list.length !== 5000) {
@@ -69,7 +69,8 @@ const Home = () => {
     }
   }
 
-  if (list)
+  if (erro) return <ErrorPage error={erro} />;
+  else if (list)
     return (
       <div className={styles.home}>
         <UserSearch

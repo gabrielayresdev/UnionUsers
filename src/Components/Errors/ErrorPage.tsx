@@ -7,7 +7,11 @@ const ErrorPage = ({ error }: { error: Error | null }) => {
     <div className={styles.error}>
       <h1 className={styles.error_title}>
         {error ? (
-          <span>{error.message}</span>
+          <span>
+            {error.name[0]}
+            <span>{error.name[1]}</span>
+            {error.name[2]}
+          </span>
         ) : (
           <span>
             4<span>0</span>4

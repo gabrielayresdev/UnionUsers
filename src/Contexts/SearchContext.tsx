@@ -7,6 +7,7 @@ interface ISearchContext {
   users: User[] | null;
   data: Result | null;
   loading: boolean;
+  erro: Error | null;
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -22,7 +23,7 @@ export function useSearchContext() {
 const SearchContextProvider = ({ children }: React.PropsWithChildren) => {
   const [users, setUsers] = React.useState<User[] | null>(null);
   const { data, loading, erro } = useFetch<Result>(
-    "https://randomuser.me/api/?results=500&seed=foobar"
+    "https://randomuser.me/api/?results=5000&seed=foobar"
   );
   const [searchValue, setSearchValue] = React.useState<string>("");
 
@@ -46,7 +47,7 @@ const SearchContextProvider = ({ children }: React.PropsWithChildren) => {
 
   return (
     <SearchContext.Provider
-      value={{ users, data, loading, searchValue, setSearchValue }}
+      value={{ users, data, loading, erro, searchValue, setSearchValue }}
     >
       {children}
     </SearchContext.Provider>
