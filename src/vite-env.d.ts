@@ -16,7 +16,7 @@ export interface User {
 }
 
 export interface Dob {
-  date: Date;
+  date: string;
   age: number;
 }
 
