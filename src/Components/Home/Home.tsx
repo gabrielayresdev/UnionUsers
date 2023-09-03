@@ -1,12 +1,13 @@
 import React from "react";
 import useFetch from "../../Hooks/useFetch";
 import { User } from "../../vite-env";
-import UserRow from "./UserRow";
 import usePagination from "../../Hooks/usePagination";
 import { useSearchContext } from "../../Contexts/SearchContext";
 import PageController from "./PageController";
 import UserList from "./UserList";
 import UserSearch from "./UserSearch";
+
+import styles from "./Home.module.sass";
 
 interface Info {
   seed: string;
@@ -70,7 +71,7 @@ const Home = () => {
 
   if (list)
     return (
-      <div>
+      <div className={styles.home}>
         <UserSearch
           goTo={goTo}
           setTotalPages={setTotalPages}

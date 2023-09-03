@@ -1,5 +1,10 @@
 import React from "react";
 
+import ChevronLeft from "../../assets/chevron-left-solid.svg";
+import ChevronRight from "/src/assets/chevron-right-solid.svg";
+
+import styles from "./PageController.module.sass";
+
 interface IPageController {
   previousPage: VoidFunction;
   nextPage: VoidFunction;
@@ -39,19 +44,23 @@ const PageController = ({
   }, [page, totalPages, requestMoreUsers]);
 
   return (
-    <div>
-      <button style={{ margin: "1rem" }} onClick={() => previousPage()}>
-        Previous
+    <div className={styles.controller}>
+      <button className={styles.button} onClick={() => previousPage()}>
+        <img src={ChevronLeft} alt="Previous page" />
       </button>
       {paginationButtons?.map((v) => {
         return (
-          <button key={v} onClick={() => goTo(v)}>
+          <button
+            className={`${styles.button} ${page === v ? styles.active : ""}`}
+            key={v}
+            onClick={() => goTo(v)}
+          >
             {v + 1}
           </button>
         );
       })}
-      <button style={{ margin: "1rem" }} onClick={() => nextPage()}>
-        Next
+      <button className={styles.button} onClick={() => nextPage()}>
+        <img src={ChevronRight} alt="" />
       </button>
     </div>
   );

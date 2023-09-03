@@ -1,5 +1,6 @@
 import React from "react";
 import { useSearchContext } from "../../Contexts/SearchContext";
+import styles from "./UserSearch.module.sass";
 
 interface IUserSearch {
   goTo: (num: number) => void;
@@ -30,13 +31,17 @@ const UserSearch = ({ goTo, setTotalPages, itemsPerPage }: IUserSearch) => {
   }, [search, setTotalPages, itemsPerPage]);
 
   return (
-    <input
-      type="text"
-      value={search.searchValue}
-      onChange={({ target }) => {
-        search.setSearchValue(target.value);
-      }}
-    />
+    <div className={styles.searchContainer}>
+      <h2 className={styles.title}>List Users</h2>
+      <input
+        className={styles.input}
+        type="text"
+        value={search.searchValue}
+        onChange={({ target }) => {
+          search.setSearchValue(target.value);
+        }}
+      />
+    </div>
   );
 };
 
