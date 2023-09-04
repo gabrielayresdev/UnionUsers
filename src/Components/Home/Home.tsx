@@ -79,6 +79,7 @@ const Home = () => {
           setTotalPages={setTotalPages}
           itemsPerPage={itemsPerPage}
         />
+
         <UserList
           users={search.users ? search.users : list}
           page={page}

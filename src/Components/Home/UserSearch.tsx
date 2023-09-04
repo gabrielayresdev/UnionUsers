@@ -10,7 +10,6 @@ interface IUserSearch {
 
 const UserSearch = ({ goTo, setTotalPages, itemsPerPage }: IUserSearch) => {
   const search = useSearchContext();
-  const goToRef = React.useRef(goTo);
   const cleansInputRef = React.useRef(() => search.setSearchValue(""));
 
   // Limpa o valor da pesquisa
@@ -20,7 +19,7 @@ const UserSearch = ({ goTo, setTotalPages, itemsPerPage }: IUserSearch) => {
 
   React.useEffect(() => {
     // Muda para a primeira página sempre que o valor do imput for alterado
-    goToRef.current(0);
+    goTo(0);
     if (search.searchValue) {
       setTotalPages(() => {
         if (search.users) {
