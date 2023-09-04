@@ -9,6 +9,7 @@ import UserSearch from "./UserSearch";
 
 import styles from "./Home.module.sass";
 import ErrorPage from "../Errors/ErrorPage";
+import Popup from "../Errors/Popup";
 
 interface Info {
   seed: string;
@@ -91,9 +92,12 @@ const Home = () => {
           totalPages={totalPages}
           requestMoreUsers={requestMoreUsers}
         />
+        {search.erro ? (
+          <Popup message="Houve um erro ao fazer a conexão com o servidor. Funcionalidades como busca podem não funcionar corretamente." />
+        ) : null}
       </div>
     );
-  return <div></div>;
+  else return <div></div>;
 };
 
 export default Home;
