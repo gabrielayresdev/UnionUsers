@@ -3,9 +3,10 @@
 .controller 
     display: flex
     gap: .5rem
+    margin-bottom: 3rem
     .button
         all: unset
-        border: 1px solid #811AC0
+        border: 1px solid $C6
         border-radius: 50%
         width: 5rem
         aspect-ratio: 1/1
@@ -18,12 +19,19 @@
         font-size: 2rem
 
         &:hover 
-            background: #811ac0
+            background: $C6
             color: $C1
         
         img
             width: .875rem
 
         &.active 
-            background: #811ac0
+            background: $C6
             color: $C1
+
+        @media (max-width: $mobileBreakpoint)
+            width: 3rem
+            font-size: 1.125rem
+
+            img 
+                width: .5rem

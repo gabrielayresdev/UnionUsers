@@ -16,10 +16,10 @@ const UserList = ({ users, page, itemsPerPage }: IUserList) => {
       <div className={styles.tHead}>
         <p>ID</p>
         <p>First Name</p>
-        <p>Last Name</p>
-        <p>Title</p>
-        <p>Date</p>
-        <p>Age</p>
+        <p className={styles.mobileHidden}>Last Name</p>
+        <p className={styles.mobileHidden}>Title</p>
+        <p className={styles.mobileHidden}>Date</p>
+        <p className={styles.mobileHidden}>Age</p>
         <p>Actions</p>
       </div>
       <div className={styles.tBody}>

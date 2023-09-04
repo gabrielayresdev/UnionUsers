@@ -1,15 +1,26 @@
+@import '/src/variables'
+    
 .table 
     width: 70%
     .tHead 
         display: grid
         grid-template-columns: repeat(7, 1fr)
-        background: #811AC0
+        background: $C6
         p 
             flex: 1
             text-align: center
             padding: .5rem
             font-size: 1.125rem
             line-height: 1.6875rem
+        @media (max-width: $mobileBreakpoint)
+            grid-template-columns: repeat(3, 1fr)
+            .mobileHidden
+                display: none
     .tBody
         display: flex
         flex-direction: column
+
+    @media (max-width: $tabletBreakpoint) 
+        width: 90%
+        
+    

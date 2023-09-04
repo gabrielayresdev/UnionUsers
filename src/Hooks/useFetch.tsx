@@ -23,6 +23,7 @@ function useFetch<T>(url: RequestInfo | URL, options?: RequestInit) {
           signal,
           ...optionsRef.current,
         });
+        console.log(response);
 
         if (!response.ok) {
           const json = await response.json();

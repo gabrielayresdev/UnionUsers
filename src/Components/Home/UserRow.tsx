@@ -9,10 +9,10 @@ const UserRow = ({ user }: { user: User }) => {
     <div className={styles.userRow}>
       <p>{user.id.value ? user.id.value : <i>null</i>}</p>
       <p>{user.name.first}</p>
-      <p>{user.name.last}</p>
-      <p>{user.name.title}</p>
-      <p>{dateFormat(user.dob.date)}</p>
-      <p>{user.dob.age}</p>
+      <p className={styles.mobileHidden}>{user.name.last}</p>
+      <p className={styles.mobileHidden}>{user.name.title}</p>
+      <p className={styles.mobileHidden}>{dateFormat(user.dob.date)}</p>
+      <p className={styles.mobileHidden}>{user.dob.age}</p>
       <Link to={`/usuario/${user.login.uuid}`}>See profile</Link>
     </div>
   );

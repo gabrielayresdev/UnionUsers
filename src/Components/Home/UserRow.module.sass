@@ -15,7 +15,7 @@
         color: $C2
 
     a 
-        color: #811AC0
+        color: $C6
         text-decoration: none
         transition:  all .3s
         &:hover 
@@ -24,3 +24,8 @@
     i 
         font-style: italic
         color: #ff4949
+
+    @media (max-width: $mobileBreakpoint)
+        grid-template-columns: repeat(3, 1fr)
+        .mobileHidden
+            display: none
